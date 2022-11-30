@@ -2,10 +2,12 @@
 nextflow.enable.dsl = 2
 
 //test params
-params.config = "test.config.yaml"
+params.config = "/agora-data-tools/test_config.yaml"
 
 //runs test config for Agora
 process AGORA_DATA_RUN {
+
+    debug true
 
     container "sagebionetworks/agora-data-tools"
 
@@ -16,10 +18,12 @@ process AGORA_DATA_RUN {
 
     script:
     """
-    python ./agoradatatools/process.py ${config}
+    python /agora-data-tools/agoradatatools/process.py ${config}
     """
 
 }
+
+
 
 workflow{
 
