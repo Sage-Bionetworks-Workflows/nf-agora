@@ -1,9 +1,6 @@
 // Ensure DSL2
 nextflow.enable.dsl = 2
 
-//test params
-params.config = "/agora-data-tools/test_config.yaml"
-
 //runs test config for Agora
 process AGORA_DATA_RUN {
 
@@ -14,7 +11,7 @@ process AGORA_DATA_RUN {
     secret "SYNAPSE_AUTH_TOKEN"
 
     input:
-    val(config)
+    path(config)
 
     script:
     """
