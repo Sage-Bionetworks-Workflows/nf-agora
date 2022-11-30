@@ -4,7 +4,6 @@ nextflow.enable.dsl = 2
 //runs test config for Agora
 process AGORA_DATA_RUN {
 
-    debug true
 
     container "sagebionetworks/agora-data-tools"
 
