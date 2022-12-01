@@ -31,6 +31,6 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
 
 ### Monitoring your Run
 
-1. Switch to the "Runs" tab near the top of the page. You should see your new run pop up in orange as it is being submitted. This may take 3-7 minutes.
-2. When the job has been submitted and begins to run, it will turn blue, if it succeeds it will turn green and finally, if it fails it will turn red.
+1. Switch to the "Runs" tab near the top of the page. You should see your new run pop up in orange as it is being submitted. When it has been submitted and starts to run, it will turn blue. This may take a few minutes.
+2. If the job succeeds it will turn green and if it fails it will turn red.
 3. In the event of a failed job, contact DPE and we will look into the issue further.
