@@ -13,21 +13,14 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
 3. In the top left corner, you should see “Sage-Bionetworks/agora-project”. This indicates that you are in the workspace for Agora in our Nextflow Tower instance.
 4. If you are not in the correct workspace, click on the drop-down and select “agora-project”.
 
-### Launching the Pipeline for Testing
+### Launching the Pipeline
 
 1. In the “Launchpad” tab, click on the tile labeled “nf-agora”.
 2. At the top, give your Workflow run a name if you want. If you leave it blank, a randomly generated name will be given to it.
-3. Under "Config profile", add `test`.
-* There is no need to add to "Pipeline parameters", as the `test` profile provides the path to `test_config.yaml` to the pipeline by default
+3. If you are running for Testing, add `test` under "Config profile". If you are running for Production, add `prod` instead.
 4. In the bottom right corner, click "Launch"
 
-### Launching the ETL Pipeline
-
-1. In the “Launchpad” tab, click on the tile labeled “nf-agora”.
-2. At the top, give your Workflow run a name if you want. If you leave it blank, a randomly generated name will be given to it.
-3. Under "Pipeline parameters", paste the following text: 
-   `config: "https://raw.githubusercontent.com/Sage-Bionetworks/agora-data-tools/dev/config.yaml"`
-4. In the bottom right corner, click "Launch"
+![Alt text](img/nf_launch.png)
 
 ### Monitoring your Run
 
