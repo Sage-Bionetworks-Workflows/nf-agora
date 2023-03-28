@@ -14,7 +14,7 @@ process AGORA_DATA_RUN {
 
     script:
     """
-    python /agora-data-tools/agoradatatools/process.py ${config}
+    adt ${config}
     """
 
 }
