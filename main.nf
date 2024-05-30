@@ -14,7 +14,7 @@ process AGORA_DATA_RUN {
 
     script:
     """
-    adt ${config}
+    adt ${config} --upload --platform NEXTFLOW
     """
 
 }
