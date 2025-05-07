@@ -4,7 +4,7 @@ nextflow.enable.dsl = 2
 //runs test config for Agora
 process AGORA_DATA_RUN {
 
-    container "ghcr.io/sage-bionetworks/agora-data-tools:latest"
+    container "ghcr.io/linglp/agora-ag-1092:latest"
 
     secret "SYNAPSE_AUTH_TOKEN"
 
