@@ -23,7 +23,7 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
     - model_ad_preprod — Model AD pre-production run
     - model_ad_prod — Model AD production run
 
-    ![Alt text](img/general_config.png)
+    ![General config profile selection in Nextflow Tower](img/general_config.png)
 
 4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the config will be processed. Supports a single name (e.g. gene_info) or a comma-separated list (e.g. gene_info,team_info).
 
