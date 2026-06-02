@@ -18,10 +18,10 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
 1. In the “Launchpad” tab, click on the tile labeled “nf-agora”.
 2. At the top, give your Workflow run a name if you want. If you leave it blank, a randomly generated name will be given to it.
 3. Under "Config profiles", select the appropriate profile:
-    agora_preprod — Agora pre-production run
-    agora_prod — Agora production run
-    model_ad_preprod — Model AD pre-production run
-    model_ad_prod — Model AD production run
+    - agora_preprod — Agora pre-production run
+    - agora_prod — Agora production run
+    - model_ad_preprod — Model AD pre-production run
+    - model_ad_prod — Model AD production run
 4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the config will be processed. Supports a single name (e.g. gene_info) or a comma-separated list (e.g. gene_info,team_info).
 4. In the bottom right corner, click "Launch"
 
