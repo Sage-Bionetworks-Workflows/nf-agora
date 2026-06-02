@@ -13,7 +13,7 @@ process AGORA_DATA_RUN {
     val dataset
 
     script:
-    def datasetFlag = dataset ? "--dataset ${dataset}" : ''
+    def datasetFlag = dataset ? "--dataset '${dataset}'" : ''
     """
     adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag}
     """
