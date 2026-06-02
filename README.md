@@ -31,7 +31,7 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
 
 5. In the bottom right corner, click "Launch"
 
-    ![Alt text](img/nf_launch.png)
+    ![Nextflow Tower launch button location](img/nf_launch.png)
 
 
 ### Monitoring your Run
