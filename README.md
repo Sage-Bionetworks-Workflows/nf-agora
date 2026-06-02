@@ -27,7 +27,7 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
 
 4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the config will be processed. Supports a single name (e.g. gene_info) or a comma-separated list (e.g. gene_info,team_info).
 
-    ![Alt text](img/run_params.png)
+    ![Run parameters panel showing the dataset field](img/run_params.png)
 
 5. In the bottom right corner, click "Launch"
 
