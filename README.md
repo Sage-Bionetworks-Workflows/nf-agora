@@ -2,29 +2,30 @@
 
 ## Intro
 
-This repository contains a Nextflow Pipeline that wraps agora-data-tools and therefore the Agora ETL process. It is deployed on Sage's Nextflow Tower Instance, making it simple to trigger and monitor runs. 
+This repository contains a Nextflow Pipeline that wraps agora-data-tools and therefore the Agora ETL process. It is deployed on Sage's Seqera Platform instance, making it simple to trigger and monitor runs. 
 
-## Running the pipeline on Nextflow Tower
+## Running the pipeline on Seqera Platform
 
-### Getting Oriented in Nextflow Tower
+### Getting Oriented in Seqera Platform
 
 1. Navigate to https://tower.sagebionetworks.org/login.
-2. Click “Sign in with Google” and enter your Sage credentials.
-3. In the top left corner, you should see “Sage-Bionetworks/agora-project”. This indicates that you are in the workspace for Agora in our Nextflow Tower instance.
-4. If you are not in the correct workspace, click on the drop-down and select “agora-project”.
+2. Click "Sign in with Google" and enter your Sage credentials.
+3. In the top left corner, you should see "Sage-Bionetworks/agora-project". This indicates that you are in the workspace for Agora in our Seqera Platform instance.
+4. If you are not in the correct workspace, click on the drop-down and select "agora-project".
 
 ### Launching the Pipeline
 
-1. In the “Launchpad” tab, click on the tile labeled “nf-agora”.
+For a general overview of the Seqera Platform launch form, see the
+[Seqera quickstart guide](https://docs.seqera.io/platform-enterprise/getting-started/quickstart-demo/launch-pipelines).
+
+
+1. In the "Launchpad" tab, click on the tile labeled "nf-agora".
 2. At the top, give your Workflow run a name if you want. If you leave it blank, a randomly generated name will be given to it.
 3. Under "General Config > Config profiles", select the appropriate profile:
     - agora_preprod — Agora pre-production run
     - agora_prod — Agora production run
     - model_ad_preprod — Model AD pre-production run
     - model_ad_prod — Model AD production run
-
-    ![General config profile selection in Nextflow Tower](img/general_config.png)
-
 4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the config will be processed. Supports a single name (e.g. genes_biodomains) or a comma-separated list (e.g. genes_biodomains,team_info).
 
     The following example uses a comma-separated list:
@@ -37,9 +38,6 @@ This repository contains a Nextflow Pipeline that wraps agora-data-tools and the
 
 
 5. In the bottom right corner, click "Launch"
-
-    ![Nextflow Tower launch button location](img/nf_launch.png)
-
 
 ### Monitoring your Run
 
