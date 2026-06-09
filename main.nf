@@ -10,10 +10,12 @@ process AGORA_DATA_RUN {
 
     input:
     path(config)
+    val dataset
 
     script:
+    def datasetFlag = dataset ? "--dataset '${dataset}'" : ''
     """
-    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName}
+    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag}
     """
 
 }
@@ -22,6 +24,6 @@ process AGORA_DATA_RUN {
 
 workflow{
 
-    AGORA_DATA_RUN(params.config)
+    AGORA_DATA_RUN(params.config, params.dataset)
 
 }
