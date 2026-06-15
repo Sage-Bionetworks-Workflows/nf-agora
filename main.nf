@@ -12,6 +12,8 @@ process AGORA_DATA_RUN {
     secret "SYNAPSE_AUTH_TOKEN"
 
     memory { LARGE_MEMORY_DATASETS.contains(dataset) ? 64.GB * task.attempt : 32.GB * task.attempt }
+    //make sure other tasks can finish when one task fails
+    errorStrategy 'finish'
 
     input:
     path(config)
