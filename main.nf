@@ -7,7 +7,7 @@ process AGORA_DATA_RUN {
 
     secret "SYNAPSE_AUTH_TOKEN"
 
-    memory { ['rna_de_individual', 'rna_de_aggregate'].contains(dataset) ? 64.GB * task.attempt : 5.GB * task.attempt }
+    memory { ['rna_de_individual', 'rna_de_aggregate'].contains(dataset) ? 64.GB * task.attempt : 32.GB * task.attempt }
     //make sure other tasks can finish when one task fails
     errorStrategy 'finish'
 
