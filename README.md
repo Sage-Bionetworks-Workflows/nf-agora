@@ -38,7 +38,7 @@ For a general overview of the Seqera Platform launch form, see the
     - agora_prod — Agora production run
     - model_ad_preprod — Model AD pre-production run
     - model_ad_prod — Model AD production run
-4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the config will be processed. Supports a single name (e.g. genes_biodomains) or a comma-separated list (e.g. genes_biodomains,team_info).
+4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the selected config will be processed. Supports a single name (e.g. genes_biodomains) or a comma-separated list (e.g. genes_biodomains,team_info).
 
     The following example uses a comma-separated list:
 
@@ -89,7 +89,7 @@ NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 
 
 ### Run Commands
 
-Run a specific dataset or comma-separated list of datasets:
+Run a specific dataset or comma-separated list of datasets. Available datasets are those listed under `datasets` in the selected config file:
 
 ```bash
 NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details'
