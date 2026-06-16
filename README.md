@@ -1,5 +1,17 @@
 # nf-agora
 
+## Table of Contents
+
+- [Intro](#intro)
+- [Running the Pipeline on Seqera Platform](#running-the-pipeline-on-seqera-platform)
+  - [Getting Oriented in Seqera Platform](#getting-oriented-in-seqera-platform)
+  - [Launching the Pipeline](#launching-the-pipeline)
+  - [Monitoring your Run](#monitoring-your-run)
+- [Running the Pipeline Locally](#running-the-pipeline-locally)
+  - [Installation and Setup](#installation-and-setup)
+  - [Matching the Nextflow Version](#matching-the-nextflow-version)
+  - [Run Commands](#run-commands)
+
 ## Intro
 
 This repository contains a Nextflow Pipeline that wraps agora-data-tools and therefore the Agora ETL process. It is deployed on Sage's Seqera Platform instance, making it simple to trigger and monitor runs. 
@@ -44,3 +56,38 @@ For a general overview of the Seqera Platform launch form, see the
 1. Switch to the "Runs" tab near the top of the page. You should see your new run pop up in orange as it is being submitted. When it has been submitted and starts to run, it will turn blue. This may take a few minutes.
 2. If the job succeeds it will turn green and if it fails it will turn red.
 3. In the event of a failed job, contact DPE and we will look into the issue further.
+
+
+## Running the Pipeline Locally
+
+### Installation and Setup
+
+Install Nextflow by following the [Nextflow installation guide](https://docs.seqera.io/nextflow/install). For CLI usage reference, see the [Nextflow CLI docs](https://docs.seqera.io/nextflow/cli).
+
+### Matching the Nextflow Version
+
+To ensure consistent behavior with Seqera Platform, use the same Nextflow version as our production instance. Our Seqera Platform is running [`v25.3.4`](https://github.com/Sage-Bionetworks-Workflows/nextflow-infra/blob/prod/config/config.yaml#L6), which uses Nextflow [`25.10.2`](https://docs.seqera.io/platform-enterprise/25.3/functionality_matrix/overview) as its baseline. Prefix your run command with `NXF_VER` to pin the version:
+
+```
+NXF_VER=25.10.2 nextflow run main.nf ...
+```
+
+### Run Commands
+
+Run a specific dataset or comma-separated list of datasets:
+
+```bash
+NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details'
+```
+
+To generate a run report and trace file for debugging:
+
+```bash
+NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details' -with-report run.html -with-trace trace.txt
+```
+
+Available config profiles:
+- `agora_preprod` — Agora pre-production run
+- `agora_prod` — Agora production run
+- `model_ad_preprod` — Model AD pre-production run
+- `model_ad_prod` — Model AD production run
