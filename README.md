@@ -72,6 +72,21 @@ To ensure consistent behavior with Seqera Platform, use the same Nextflow versio
 NXF_VER=25.10.2 nextflow run main.nf ...
 ```
 
+### Memory Configuration
+
+Before running locally, consider adjusting the default memory parameters in `nextflow.config` to match your machine's available resources:
+
+- `default_memory_gb` — memory allocated per task (default: `32`)
+- `large_memory_gb` — memory allocated for large datasets (default: `64`)
+
+You can also override them at runtime:
+
+```bash
+NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview' --default_memory_gb 8
+```
+
+> **Note:** The datasets `rna_de_aggregate` and `rna_de_individual` are large and cannot be run locally. To validate your setup, please run other smaller datasets. 
+
 ### Run Commands
 
 Run a specific dataset or comma-separated list of datasets:
