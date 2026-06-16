@@ -100,9 +100,3 @@ To generate a run report and trace file for debugging:
 ```bash
 NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details' -with-report run.html -with-trace trace.txt
 ```
-
-Available config profiles:
-- `agora_preprod` — Agora pre-production run
-- `agora_prod` — Agora production run
-- `model_ad_preprod` — Model AD pre-production run
-- `model_ad_prod` — Model AD production run
