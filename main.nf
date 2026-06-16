@@ -20,8 +20,10 @@ process AGORA_DATA_RUN {
     val dataset
 
     script:
+    // omit --dataset flag entirely if dataset is empty
+    def datasetFlag = dataset ? "--dataset '${dataset}'" : ''
     """
-    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} --dataset '${dataset}'
+    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag}
     """
 
 }
@@ -31,9 +33,12 @@ process AGORA_DATA_RUN {
 workflow {
 
     if (params.dataset) {
-        datasets_ch = Channel.of(params.dataset)
+        // split comma-separated dataset names (handles optional spaces) into separate channel items
+        datasets_ch = Channel.of(params.dataset.split(',\\s*'))
     } else {
+        // fetch and parse the YAML config file
         def yaml = new Yaml().load(new URL(params.config).text)
+        // extract each dataset name and emit as separate channel items
         datasets_ch = Channel.from(yaml.datasets.collect { it.keySet().first() })
     }
 
