@@ -7,7 +7,7 @@ def LARGE_MEMORY_DATASETS = ['rna_de_individual', 'rna_de_aggregate']
 
 process AGORA_DATA_RUN {
 
-    container "ghcr.io/sage-bionetworks/agora-data-tools:ag-2122-combined"
+    container "ghcr.io/sage-bionetworks/agora-data-tools:latest"
 
     secret "SYNAPSE_AUTH_TOKEN"
 
