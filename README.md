@@ -66,10 +66,11 @@ Install Nextflow by following the [Nextflow installation guide](https://docs.seq
 
 ### Matching the Nextflow Version
 
-To ensure consistent behavior with Seqera Platform, use the same Nextflow version as our production instance. Our Seqera Platform is running [`v25.3.4`](https://github.com/Sage-Bionetworks-Workflows/nextflow-infra/blob/prod/config/config.yaml#L6), which uses Nextflow [`25.10.2`](https://docs.seqera.io/platform-enterprise/25.3/functionality_matrix/overview) as its baseline. Prefix your run command with `NXF_VER` to pin the version:
+To ensure consistent behavior with Seqera Platform, use the same Nextflow version as our production instance. Check the `tower_version` in the [nextflow-infra prod config](https://github.com/Sage-Bionetworks-Workflows/nextflow-infra/blob/prod/config/config.yaml#L6), then look up the corresponding Nextflow version in the [Seqera Platform functionality matrix](https://docs.seqera.io/platform-enterprise/25.3/functionality_matrix/overview). Prefix your run command with `NXF_VER` to pin the version:
 
 ```
-NXF_VER=25.10.2 nextflow run main.nf ...
+# Replace <SEQERA_PLATFORM_NEXTFLOW_VERSION> with the version from the functionality matrix (e.g. 25.10.2)
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf ...
 ```
 
 ### Memory Configuration
@@ -82,7 +83,7 @@ Before running locally, consider adjusting the default memory parameters in `nex
 You can also override them at runtime:
 
 ```bash
-NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview' --default_memory_gb 8
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview' --default_memory_gb 8
 ```
 
 > **Note:** The datasets `rna_de_aggregate` and `rna_de_individual` are large and cannot be run locally. To validate your setup, please run other smaller datasets. 
@@ -92,11 +93,11 @@ NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 
 Run a specific dataset or comma-separated list of datasets. Available datasets are those listed under `datasets` in the selected config file:
 
 ```bash
-NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details'
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details'
 ```
 
 To generate a run report and trace file for debugging:
 
 ```bash
-NXF_VER=25.10.2 nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details' -with-report run.html -with-trace trace.txt
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details' -with-report run.html -with-trace trace.txt
 ```
