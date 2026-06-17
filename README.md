@@ -1,5 +1,17 @@
 # nf-agora
 
+## Table of Contents
+
+- [Intro](#intro)
+- [Running the Pipeline on Seqera Platform](#running-the-pipeline-on-seqera-platform)
+  - [Getting Oriented in Seqera Platform](#getting-oriented-in-seqera-platform)
+  - [Launching the Pipeline](#launching-the-pipeline)
+  - [Monitoring your Run](#monitoring-your-run)
+- [Running the Pipeline Locally](#running-the-pipeline-locally)
+  - [Installation and Setup](#installation-and-setup)
+  - [Matching the Nextflow Version](#matching-the-nextflow-version)
+  - [Run Commands](#run-commands)
+
 ## Intro
 
 This repository contains a Nextflow Pipeline that wraps agora-data-tools and therefore the Agora ETL process. It is deployed on Sage's Seqera Platform instance, making it simple to trigger and monitor runs. 
@@ -26,7 +38,7 @@ For a general overview of the Seqera Platform launch form, see the
     - agora_prod — Agora production run
     - model_ad_preprod — Model AD pre-production run
     - model_ad_prod — Model AD production run
-4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the config will be processed. Supports a single name (e.g. genes_biodomains) or a comma-separated list (e.g. genes_biodomains,team_info).
+4. Optionally, set the dataset parameter to process a specific dataset. If left blank, all datasets in the selected config will be processed. Supports a single name (e.g. genes_biodomains) or a comma-separated list (e.g. genes_biodomains,team_info).
 
     The following example uses a comma-separated list:
 
@@ -44,3 +56,48 @@ For a general overview of the Seqera Platform launch form, see the
 1. Switch to the "Runs" tab near the top of the page. You should see your new run pop up in orange as it is being submitted. When it has been submitted and starts to run, it will turn blue. This may take a few minutes.
 2. If the job succeeds it will turn green and if it fails it will turn red.
 3. In the event of a failed job, contact DPE and we will look into the issue further.
+
+
+## Running the Pipeline Locally
+
+### Installation and Setup
+
+Install Nextflow by following the [Nextflow installation guide](https://docs.seqera.io/nextflow/install). For CLI usage reference, see the [Nextflow CLI docs](https://docs.seqera.io/nextflow/cli).
+
+### Matching the Nextflow Version
+
+To ensure consistent behavior with Seqera Platform, use the same Nextflow version as our production instance. Check the `tower_version` in the [nextflow-infra prod config](https://github.com/Sage-Bionetworks-Workflows/nextflow-infra/blob/prod/config/config.yaml#L6), then look up the corresponding Nextflow version in the [Seqera Platform functionality matrix](https://docs.seqera.io/platform-enterprise/25.3/functionality_matrix/overview). Prefix your run command with `NXF_VER` to pin the version:
+
+```
+# Replace <SEQERA_PLATFORM_NEXTFLOW_VERSION> with the version from the functionality matrix (e.g. 25.10.2)
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf ...
+```
+
+### Memory Configuration
+
+Before running locally, consider adjusting the default memory parameters in `nextflow.config` to match your machine's available resources:
+
+- `default_memory_gb` — memory allocated per task (default: `32`)
+- `large_memory_gb` — memory allocated for large datasets (default: `64`)
+
+You can also override them at runtime:
+
+```bash
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview' --default_memory_gb 8
+```
+
+> **Note:** The datasets `rna_de_aggregate` and `rna_de_individual` are large and cannot be run locally. To validate your setup, please run other smaller datasets. 
+
+### Run Commands
+
+Run a specific dataset or comma-separated list of datasets. Available datasets are those listed under `datasets` in the selected config file:
+
+```bash
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details'
+```
+
+To generate a run report and trace file for debugging:
+
+```bash
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details' -with-report run.html -with-trace trace.txt
+```
