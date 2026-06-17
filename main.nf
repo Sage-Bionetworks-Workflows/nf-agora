@@ -9,7 +9,14 @@ process AGORA_DATA_RUN {
 
     secret "SYNAPSE_AUTH_TOKEN"
 
-    memory { params.large_memory_datasets.split(',').contains(dataset) ? params.large_memory_gb.GB * task.attempt : params.default_memory_gb.GB * task.attempt }
+    // allocate more memory for known large datasets
+    memory {
+        def largeDatasets = params.large_memory_datasets ? params.large_memory_datasets.split(',') : []
+        def mem = largeDatasets.contains(dataset) ? params.large_memory_gb.GB * task.attempt : params.default_memory_gb.GB * task.attempt
+        mem
+    }
+
+
     //make sure other tasks can finish when one task fails
     errorStrategy 'finish'
 
@@ -32,13 +39,15 @@ workflow {
 
     if (params.dataset) {
         // split comma-separated dataset names (handles optional spaces) into separate channel items
-        datasets_ch = Channel.fromList(params.dataset.split(',\\s*').toList())
+        datasets_ch = Channel.fromList(params.dataset.split(',\\s*').toList().toUnique())
     } else {
         // fetch and parse the YAML config file
         def yaml = new org.yaml.snakeyaml.Yaml().load(new URL(params.config).text)
         // extract each dataset name and emit as separate channel items
         datasets_ch = Channel.fromList(yaml.datasets.collect { it.keySet().first() })
     }
+
+    datasets_ch.view { "Dataset: $it" }
 
     AGORA_DATA_RUN(params.config, datasets_ch)
 
