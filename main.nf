@@ -5,7 +5,7 @@ process AGORA_DATA_RUN {
 
     tag "$dataset"
 
-    container "ghcr.io/sage-bionetworks/agora-data-tools:latest"
+    container "ghcr.io/sage-bionetworks/agora-data-tools:AG-2149"
 
     secret "SYNAPSE_AUTH_TOKEN"
 
@@ -24,16 +24,29 @@ process AGORA_DATA_RUN {
     path(config)
     val dataset
 
+    output:
+    val dataset
+
     script:
     // omit --dataset flag entirely if dataset is empty
     def datasetFlag = dataset ? "--dataset '${dataset}'" : ''
     """
-    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag}
+    adt process ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag} --skip-manifest
     """
 
 }
 
 
+process RELEASE_MANIFEST {
+    input:
+    path(config)
+
+    script:
+        """
+        echo "All data processing complete. Upload manifest csv and dataversion.json to Synapse."
+        adt release-manifest ${config}
+        """
+}
 
 workflow {
 
@@ -50,5 +63,6 @@ workflow {
     datasets_ch.view { "Dataset: $it" }
 
     AGORA_DATA_RUN(params.config, datasets_ch)
+    RELEASE_MANIFEST(AGORA_DATA_RUN.out.collect().map { params.config })
 
 }
