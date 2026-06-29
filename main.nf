@@ -38,6 +38,9 @@ process AGORA_DATA_RUN {
 
 
 process RELEASE_MANIFEST {
+    container "ghcr.io/sage-bionetworks/agora-data-tools:AG-2149"
+    secret "SYNAPSE_AUTH_TOKEN"
+
     input:
     path(config)
 
