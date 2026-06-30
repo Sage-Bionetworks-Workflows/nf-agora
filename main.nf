@@ -9,14 +9,6 @@ process AGORA_DATA_RUN {
 
     secret "SYNAPSE_AUTH_TOKEN"
 
-    // allocate more memory for known large datasets
-    memory {
-        def largeDatasets = params.large_memory_datasets ? params.large_memory_datasets.split(',') : []
-        def mem = largeDatasets.contains(dataset) ? params.large_memory_gb.GB * task.attempt : params.default_memory_gb.GB * task.attempt
-        mem
-    }
-
-
     //make sure other tasks can finish when one task fails
     errorStrategy 'finish'
 
