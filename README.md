@@ -96,16 +96,16 @@ Run a specific dataset or comma-separated list of datasets. Available datasets a
 NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,model_ad_preprod --dataset 'model_overview,model_details'
 ```
 
-To override the config file (e.g. to test against a custom config):
+To override the config file (e.g. to test against a custom branch config). Note: if a profile already sets the config (e.g. `agora_preprod`), `--config` will override it:
 
 ```bash
 NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker --dataset 'biodomain_info' --config 'https://raw.githubusercontent.com/Sage-Bionetworks/agora-data-tools/refs/heads/<branch>/configs/<config_name>.yaml'
 ```
 
-To use a specific container image (e.g. to test against a feature branch image):
+To use a specific container image (e.g. to test against a feature branch image), combine with an existing profile to avoid having to specify `--config`:
 
 ```bash
-NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker --dataset 'biodomain_info' --config '<config_url>' --container 'ghcr.io/sage-bionetworks/agora-data-tools:<tag>'
+NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf -profile docker,agora_preprod --dataset 'biodomain_info' --container 'ghcr.io/sage-bionetworks/agora-data-tools:<tag>'
 ```
 
 To generate a run report and trace file for debugging:
