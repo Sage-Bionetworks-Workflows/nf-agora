@@ -36,7 +36,7 @@ process RELEASE_MANIFEST {
     script:
         """
         echo "All data processing complete. Upload manifest csv and dataversion.json to Synapse."
-        adt release-manifest ${config}
+        adt release ${config}
         """
 }
 
