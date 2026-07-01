@@ -35,6 +35,20 @@ process AGORA_DATA_RUN {
 
 
 
+workflow.onComplete {
+    def msg = """\
+        Pipeline execution summary
+        ---------------------------
+        Completed at: ${workflow.complete}
+        Duration    : ${workflow.duration}
+        Success     : ${workflow.success}
+        workDir     : ${workflow.workDir}
+        exit status : ${workflow.exitStatus}
+        """.stripIndent()
+
+    sendMail(to: params.email, subject: "nf-agora run ${workflow.runName}", body: msg)
+}
+
 workflow {
 
     if (params.dataset) {
