@@ -28,26 +28,12 @@ process AGORA_DATA_RUN {
     // omit --dataset flag entirely if dataset is empty
     def datasetFlag = dataset ? "--dataset '${dataset}'" : ''
     """
-    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag}
+    adt ${config} --upload --platform NEXTFLOW --run_id ${workflow.runName} ${datasetFlag} -N lingling.peng@sagebase.org
     """
 
 }
 
 
-
-workflow.onComplete {
-    def msg = """\
-        Pipeline execution summary
-        ---------------------------
-        Completed at: ${workflow.complete}
-        Duration    : ${workflow.duration}
-        Success     : ${workflow.success}
-        workDir     : ${workflow.workDir}
-        exit status : ${workflow.exitStatus}
-        """.stripIndent()
-
-    sendMail(to: params.email, subject: "nf-agora run ${workflow.runName}", body: msg)
-}
 
 workflow {
 
