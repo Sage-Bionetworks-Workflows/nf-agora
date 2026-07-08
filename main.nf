@@ -5,6 +5,8 @@ process AGORA_DATA_RUN {
 
     tag "$dataset"
 
+    container params.container
+
     secret "SYNAPSE_AUTH_TOKEN"
 
     //make sure other tasks can finish when one task fails
@@ -28,6 +30,8 @@ process AGORA_DATA_RUN {
 
 
 process RELEASE_MANIFEST {
+    container params.container
+
     secret "SYNAPSE_AUTH_TOKEN"
 
     input:
