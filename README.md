@@ -73,6 +73,14 @@ To ensure consistent behavior with Seqera Platform, use the same Nextflow versio
 NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf ...
 ```
 
+### Using the Latest Container Image
+
+Docker caches images locally, so a previously pulled `agora-data-tools` image may be out of date. Before running locally, pull the image you intend to use (`latest`, unless `--container` is set to something else) to make sure you're running against the current `adt` CLI:
+
+```bash
+docker pull ghcr.io/sage-bionetworks/agora-data-tools:latest
+```
+
 ### Memory Configuration
 
 Before running locally, consider adjusting the default memory parameters in `nextflow.config` to match your machine's available resources:
