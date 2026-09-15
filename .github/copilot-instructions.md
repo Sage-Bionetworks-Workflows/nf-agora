@@ -1,5 +1,15 @@
 # Copilot Instructions for nf-agora
 
+## Writing pull request titles
+
+Follow the convention used across this org's repos (see this repo's own history, e.g. `[AG-2149] separate manifest release and add parallel dataset processing`, `[AG-2135] add documentation for running nextflow locally`, and the closed PRs in [synapsePythonClient](https://github.com/Sage-Bionetworks/synapsePythonClient/pulls?q=is%3Apr+state%3Aclosed), e.g. `[SYNPY-1918] Fix JSON Schema conversion bugs`, `[SYNPY-1840] Add ability to set column order when creating file and record based tasks.`):
+
+- If a Jira ticket ID can be determined from the branch name or commit messages (e.g. `AG-2136`, `IBCDPE-947`), prefix the title with it in square brackets: `[AG-2136] <summary>`. Don't invent a ticket ID if none is inferable — omit the prefix instead.
+- After the optional ticket prefix, write a short, specific, imperative-mood summary of the change (e.g. "Fix container param location", "Add `--dataset` parameter for nextflow run") — not a vague label like "Updates" or "Changes".
+- Keep it to one line, short enough to scan in a PR list (roughly under 70-80 characters after the ticket prefix).
+- Don't restate the ticket ID's text verbatim if it doesn't describe the actual diff — describe what the code change does, not the ticket title.
+- A conventional-commit-style prefix (`fix:`, `feat:`) is optional and only used in this org's repos when there is no Jira ticket for the change (e.g. `fix: make container overridable via params`) — don't combine both a ticket prefix and a `fix:`/`feat:` prefix.
+
 ## Writing pull request descriptions
 
 Base the PR description on the actual code changes (diff + commit messages), not just the PR title.
