@@ -22,3 +22,6 @@
     - How you tested the solution
     - Any relevant test results (Do not include any test results that may contain sensitive information)
     - Any automated tests that were added to the codebase
+
+- [ ] Verified the pipeline runs successfully locally
+- [ ] Verified the pipeline runs successfully on Seqera
