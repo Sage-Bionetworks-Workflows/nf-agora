@@ -60,6 +60,14 @@ For a general overview of the Seqera Platform launch form, see the
 
 ## Running the Pipeline Locally
 
+### Using the Latest Container Image
+
+Docker caches images locally, so a previously pulled `agora-data-tools` image may be out of date. Before running locally, pull the image you intend to use (`latest`, unless `--container` is set to something else) to make sure you're running against the current `adt` CLI:
+
+```bash
+docker pull ghcr.io/sage-bionetworks/agora-data-tools:latest
+```
+
 ### Installation and Setup
 
 Install Nextflow by following the [Nextflow installation guide](https://docs.seqera.io/nextflow/install). For CLI usage reference, see the [Nextflow CLI docs](https://docs.seqera.io/nextflow/cli).
@@ -71,14 +79,6 @@ To ensure consistent behavior with Seqera Platform, use the same Nextflow versio
 ```
 # Replace <SEQERA_PLATFORM_NEXTFLOW_VERSION> with the version from the functionality matrix (e.g. 25.10.2)
 NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf ...
-```
-
-### Using the Latest Container Image
-
-Docker caches images locally, so a previously pulled `agora-data-tools` image may be out of date. Before running locally, pull the image you intend to use (`latest`, unless `--container` is set to something else) to make sure you're running against the current `adt` CLI:
-
-```bash
-docker pull ghcr.io/sage-bionetworks/agora-data-tools:latest
 ```
 
 ### Memory Configuration
