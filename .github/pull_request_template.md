@@ -23,5 +23,5 @@
     - Any relevant test results (Do not include any test results that may contain sensitive information)
     - Any automated tests that were added to the codebase
 
-- [ ] Verified the pipeline runs successfully locally
-- [ ] Verified the pipeline runs successfully on Seqera
+- [ ] Verified the pipeline runs successfully [locally](../README.md#running-the-pipeline-locally)
+- [ ] Verified the pipeline runs successfully [on Seqera](../README.md#running-the-pipeline-on-seqera-platform)
