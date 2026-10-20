@@ -86,7 +86,7 @@ NXF_VER=<SEQERA_PLATFORM_NEXTFLOW_VERSION> nextflow run main.nf ...
 Before running locally, consider adjusting the default memory parameters in `nextflow.config` to match your machine's available resources:
 
 - `default_memory_gb` — memory allocated per task (default: `32`)
-- `large_memory_gb` — memory allocated for large datasets (default: `60`)
+- `large_memory_gb` — memory allocated for large datasets (default: `64`)
 
 You can also override them at runtime:
 
