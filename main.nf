@@ -1,6 +1,4 @@
 // Ensure DSL2
-import groovy.yaml.YamlSlurper
-
 nextflow.enable.dsl = 2
 
 process AGORA_DATA_RUN {
@@ -54,7 +52,7 @@ workflow {
     } else {
         // fetch and parse the YAML config file
         def yamlText = file(params.config).text
-        def yaml = new YamlSlurper().parseText(yamlText)
+        def yaml = new groovy.yaml.YamlSlurper().parse(yamlText)
         // extract each dataset name and emit as separate channel items
         datasets_ch = Channel.fromList(yaml.datasets.collect { it.keySet().first() })
     }

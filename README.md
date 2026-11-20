@@ -65,8 +65,10 @@ For a general overview of the Seqera Platform launch form, see the
 Docker caches images locally, so a previously pulled `agora-data-tools` image may be out of date. Before running locally, pull the image you intend to use (`latest`, unless `--container` is set to something else) to make sure you're running against the current `adt` CLI:
 
 ```bash
-docker pull ghcr.io/sage-bionetworks/agora-data-tools:latest
+docker pull --platform linux/amd64 ghcr.io/sage-bionetworks/agora-data-tools:latest
 ```
+
+> **Note:** The image is only published for `linux/amd64`. The `--platform` flag is required on Apple Silicon (arm64) Macs, where Docker Desktop runs the image under emulation.
 
 ### Installation and Setup
 
